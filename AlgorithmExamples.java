@@ -1,17 +1,17 @@
 class DataType<T> {
-        private T[] array;
+    private T[] array;
 
-        public DataType(T[] array) {
-            this.array = array;
-        }
+    public DataType(T[] array) {
+        this.array = array;
+    }
 
-        public T[] get() {
-            return array;
-        }
+    public T[] get() {
+        return array;
+    }
 
-        public void set(T[] array) {
-            this.array = array;
-        }
+    public void set(T[] array) {
+        this.array = array;
+    }
 
 
 
@@ -45,6 +45,34 @@ public class AlgorithmExamples {
             }
 
             array[j + 1] = key;
+        }
+    }
+
+    public static <T extends Comparable<T>> void selectionSort(T[] array, boolean ascending) {
+        for (int i = 0; i < array.length - 1; i++) {
+            int selectedIndex = i;
+
+            // ascending: find the smallest element in the remaining array
+            if (ascending) {
+
+                for (int j = i + 1; j < array.length; j++) {
+                    if (array[j].compareTo(array[selectedIndex]) < 0) {
+                        selectedIndex = j;
+                    }
+                }
+
+            } else {
+                // descending: find the largest element in the remaining array
+                for (int j = i + 1; j < array.length; j++) {
+                    if (array[j].compareTo(array[selectedIndex]) > 0) {
+                        selectedIndex = j;
+                    }
+                }
+            }
+
+            T temp = array[selectedIndex];
+            array[selectedIndex] = array[i];
+            array[i] = temp;
         }
     }
 
