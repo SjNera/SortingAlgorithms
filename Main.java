@@ -80,7 +80,7 @@ public class Main {
 
                         switch (algorithmChoice) {
                             // Insertion Sort
-                            case 1:
+                            case 1: {
                                 int sortingOrder = SortingInterface.showSortingOrderMenu(scanner);
                                 scanner.nextLine();
 
@@ -90,26 +90,17 @@ public class Main {
                                         SortingInterface.showMessage("Ascending Order selected.");
 
                                         if (dataTypeChoice == 1) {
-                                            // Copy original data
                                             Integer[] workingData = integerData.clone();
-
-                                            // true = ascending
                                             AlgorithmExamples.insertionSort(workingData, true);
-
                                             System.out.print("Sorted Data: ");
                                             AlgorithmExamples.printArray(workingData);
                                         } else {
-                                            // Copy original data
                                             String[] workingData = stringData.clone();
-
-                                            // true = ascending
                                             AlgorithmExamples.insertionSort(workingData, true);
-
                                             System.out.print("Sorted Data: ");
                                             AlgorithmExamples.printArray(workingData);
                                         }
 
-                                        // Ask user what to do next
                                         int afterSortChoice = SortingInterface.showAfterSortMenu(scanner);
                                         scanner.nextLine();
 
@@ -130,26 +121,17 @@ public class Main {
                                         SortingInterface.showMessage("Descending Order selected.");
 
                                         if (dataTypeChoice == 1) {
-                                            // Copy original data
                                             Integer[] workingData = integerData.clone();
-
-                                            // false = descending
                                             AlgorithmExamples.insertionSort(workingData, false);
-
                                             System.out.print("Sorted Data: ");
                                             AlgorithmExamples.printArray(workingData);
                                         } else {
-                                            // Copy original data
                                             String[] workingData = stringData.clone();
-
-                                            // false = descending
                                             AlgorithmExamples.insertionSort(workingData, false);
-
                                             System.out.print("Sorted Data: ");
                                             AlgorithmExamples.printArray(workingData);
                                         }
 
-                                        // Ask user what to do next
                                         afterSortChoice = SortingInterface.showAfterSortMenu(scanner);
                                         scanner.nextLine();
 
@@ -169,6 +151,7 @@ public class Main {
                                         SortingInterface.showMessage("Invalid choice!");
                                 }
                                 break;
+                            }
 
                             // Selection Sort
                             case 2:
@@ -176,14 +159,152 @@ public class Main {
                                 break;
 
                             // Merge Sort
-                            case 3:
-                                SortingInterface.showMessage("Merge Sort will go here.");
+                            case 3: {
+                                int sortingOrder = SortingInterface.showSortingOrderMenu(scanner);
+                                scanner.nextLine();
+
+                                switch (sortingOrder) {
+                                    // Ascending
+                                    case 1:
+                                        SortingInterface.showMessage("Ascending Order selected.");
+
+                                        if (dataTypeChoice == 1) {
+                                            Integer[] workingData = integerData.clone();
+                                            AlgorithmExamples.mergeSort(workingData, 0, workingData.length - 1, true);
+                                            System.out.print("Sorted Data: ");
+                                            AlgorithmExamples.printArray(workingData);
+                                        } else {
+                                            String[] workingData = stringData.clone();
+                                            AlgorithmExamples.mergeSort(workingData, 0, workingData.length - 1, true);
+                                            System.out.print("Sorted Data: ");
+                                            AlgorithmExamples.printArray(workingData);
+                                        }
+
+                                        int afterSortChoice = SortingInterface.showAfterSortMenu(scanner);
+                                        scanner.nextLine();
+
+                                        if (afterSortChoice == 1) {
+                                            returnToMainMenu = true;
+                                        } else if (afterSortChoice == 2) {
+                                            SortingInterface.showMessage("Thank you for using the program!");
+                                            scanner.close();
+                                            return;
+                                        } else {
+                                            SortingInterface.showMessage("Invalid choice!");
+                                            returnToMainMenu = true;
+                                        }
+                                        break;
+
+                                    // Descending
+                                    case 2:
+                                        SortingInterface.showMessage("Descending Order selected.");
+
+                                        if (dataTypeChoice == 1) {
+                                            Integer[] workingData = integerData.clone();
+                                            AlgorithmExamples.mergeSort(workingData, 0, workingData.length - 1, false);
+                                            System.out.print("Sorted Data: ");
+                                            AlgorithmExamples.printArray(workingData);
+                                        } else {
+                                            String[] workingData = stringData.clone();
+                                            AlgorithmExamples.mergeSort(workingData, 0, workingData.length - 1, false);
+                                            System.out.print("Sorted Data: ");
+                                            AlgorithmExamples.printArray(workingData);
+                                        }
+
+                                        afterSortChoice = SortingInterface.showAfterSortMenu(scanner);
+                                        scanner.nextLine();
+
+                                        if (afterSortChoice == 1) {
+                                            returnToMainMenu = true;
+                                        } else if (afterSortChoice == 2) {
+                                            SortingInterface.showMessage("Thank you for using the program!");
+                                            scanner.close();
+                                            return;
+                                        } else {
+                                            SortingInterface.showMessage("Invalid choice!");
+                                            returnToMainMenu = true;
+                                        }
+                                        break;
+
+                                    default:
+                                        SortingInterface.showMessage("Invalid choice!");
+                                }
                                 break;
+                            }
 
                             // Quick Sort
-                            case 4:
-                                SortingInterface.showMessage("Quick Sort will go here.");
+                            case 4: {
+                                int sortingOrder = SortingInterface.showSortingOrderMenu(scanner);
+                                scanner.nextLine();
+
+                                switch (sortingOrder) {
+                                    // Ascending
+                                    case 1:
+                                        SortingInterface.showMessage("Ascending Order selected.");
+
+                                        if (dataTypeChoice == 1) {
+                                            Integer[] workingData = integerData.clone();
+                                            AlgorithmExamples.quickSort(workingData, 0, workingData.length - 1, true);
+                                            System.out.print("Sorted Data: ");
+                                            AlgorithmExamples.printArray(workingData);
+                                        } else {
+                                            String[] workingData = stringData.clone();
+                                            AlgorithmExamples.quickSort(workingData, 0, workingData.length - 1, true);
+                                            System.out.print("Sorted Data: ");
+                                            AlgorithmExamples.printArray(workingData);
+                                        }
+
+                                        int afterSortChoice = SortingInterface.showAfterSortMenu(scanner);
+                                        scanner.nextLine();
+
+                                        if (afterSortChoice == 1) {
+                                            returnToMainMenu = true;
+                                        } else if (afterSortChoice == 2) {
+                                            SortingInterface.showMessage("Thank you for using the program!");
+                                            scanner.close();
+                                            return;
+                                        } else {
+                                            SortingInterface.showMessage("Invalid choice!");
+                                            returnToMainMenu = true;
+                                        }
+                                        break;
+
+                                    // Descending
+                                    case 2:
+                                        SortingInterface.showMessage("Descending Order selected.");
+
+                                        if (dataTypeChoice == 1) {
+                                            Integer[] workingData = integerData.clone();
+                                            AlgorithmExamples.quickSort(workingData, 0, workingData.length - 1, false);
+                                            System.out.print("Sorted Data: ");
+                                            AlgorithmExamples.printArray(workingData);
+                                        } else {
+                                            String[] workingData = stringData.clone();
+                                            AlgorithmExamples.quickSort(workingData, 0, workingData.length - 1, false);
+                                            System.out.print("Sorted Data: ");
+                                            AlgorithmExamples.printArray(workingData);
+                                        }
+
+                                        afterSortChoice = SortingInterface.showAfterSortMenu(scanner);
+                                        scanner.nextLine();
+
+                                        if (afterSortChoice == 1) {
+                                            returnToMainMenu = true;
+                                        } else if (afterSortChoice == 2) {
+                                            SortingInterface.showMessage("Thank you for using the program!");
+                                            scanner.close();
+                                            return;
+                                        } else {
+                                            SortingInterface.showMessage("Invalid choice!");
+                                            returnToMainMenu = true;
+                                        }
+                                        break;
+
+                                    default:
+                                        SortingInterface.showMessage("Invalid choice!");
+                                }
                                 break;
+                            }
 
                             // Back
                             case 5:
