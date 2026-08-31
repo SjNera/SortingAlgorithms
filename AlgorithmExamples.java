@@ -13,8 +13,8 @@ class DataType<T> {
 
 }
 
-
 public class AlgorithmExamples {
+<<<<<<< HEAD
     public static void main(String[] args) {
     // Call the generic class here
     // Example usage of the DataType class
@@ -29,13 +29,36 @@ public class AlgorithmExamples {
         printArray(strData.get());    
     }
     
+=======
+>>>>>>> origin/Rhian
 
     public static <T> void bubbleSort(T[] array) {
 
     }
-    
-    public static <T> void insertionSort(T[] array) {
 
+    public static <T extends Comparable<T>> void insertionSort(T[] array, boolean ascending) {
+        for (int i = 1; i < array.length; i++) {
+            T key = array[i];
+            int j = i - 1;
+
+            // ascending: larger elements will move to the right
+            if (ascending) {
+
+                while (j >= 0 && array[j].compareTo(key) > 0) {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+
+            } else {
+                // descending: smaller elements will move to the left
+                while (j >= 0 && array[j].compareTo(key) < 0) {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+            }
+
+            array[j + 1] = key;
+        }
     }
 
     /**
@@ -156,6 +179,7 @@ public class AlgorithmExamples {
 
     
 
+<<<<<<< HEAD
     // Helper methods for sorting algorithms can be added here
     public static <T> void printArray(T[] array) {
         for (T element : array) {
@@ -166,4 +190,22 @@ public class AlgorithmExamples {
 
 
 
+=======
+    // displays any type of array
+    public static <T> void printArray(T[] array) {
+
+        System.out.print("[");
+
+        for (int i = 0; i < array.length; i++) {
+
+            System.out.print(array[i]);
+
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+
+        System.out.println("]");
+    }
+>>>>>>> origin/Rhian
 }
