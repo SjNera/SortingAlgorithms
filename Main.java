@@ -24,13 +24,12 @@ public class Main {
                     System.out.println("\nYou selected Integer.");
                     System.out.print("Enter integers separated by spaces: ");
 
-                    // Read integer input
+                    // Read integer input and convert it into an Integer array
                     String integerInput = scanner.nextLine();
                     String[] integerValues = integerInput.trim().split("\\s+");
 
                     integerData = new Integer[integerValues.length];
 
-                    // Convert String values to Integer
                     for (int i = 0; i < integerValues.length; i++) {
                         integerData[i] = Integer.parseInt(integerValues[i]);
                     }
@@ -42,7 +41,7 @@ public class Main {
                     System.out.println("\nYou selected String.");
                     System.out.print("Enter strings separated by spaces: ");
 
-                    // Read String input
+                    // Read String input into a String array
                     String stringInput = scanner.nextLine();
                     stringData = stringInput.trim().split("\\s+");
 
@@ -91,9 +90,8 @@ public class Main {
             }
         } while (dataTypeChoice != 1 && dataTypeChoice != 2);
 
-        // Main menu
+        // Main menu loop: sort, change data, or exit
         do {
-            // Display current data and main menu
             if (dataTypeChoice == 1) {
                 mainChoice = SortingInterface.showMainMenu(scanner, integerData);
             } else {
@@ -108,7 +106,7 @@ public class Main {
                     int algorithmChoice;
                     boolean returnToMainMenu = false;
 
-                    // Algorithm menu
+                    // Algorithm menu loop
                     do {
                         algorithmChoice = SortingInterface.showAlgorithmMenu(scanner);
                         scanner.nextLine();
@@ -189,7 +187,7 @@ public class Main {
                             }
 
                             // Selection Sort
-                             case 2:
+                            case 2:
                                 int sortingOrderSelection = SortingInterface.showSortingOrderMenu(scanner);
                                 scanner.nextLine();
 
@@ -199,26 +197,17 @@ public class Main {
                                         SortingInterface.showMessage("Ascending Order selected.");
 
                                         if (dataTypeChoice == 1) {
-                                            // Copy original data
                                             Integer[] workingData = integerData.clone();
-
-                                            // true = ascending
                                             AlgorithmExamples.selectionSort(workingData, true);
-
                                             System.out.print("Sorted Data: ");
                                             AlgorithmExamples.printArray(workingData);
                                         } else {
-                                            // Copy original data
                                             String[] workingData = stringData.clone();
-
-                                            // true = ascending
                                             AlgorithmExamples.selectionSort(workingData, true);
-
                                             System.out.print("Sorted Data: ");
                                             AlgorithmExamples.printArray(workingData);
                                         }
 
-                                        // Ask user what to do next
                                         int afterSortChoiceSelection = SortingInterface.showAfterSortMenu(scanner);
                                         scanner.nextLine();
 
@@ -239,26 +228,17 @@ public class Main {
                                         SortingInterface.showMessage("Descending Order selected.");
 
                                         if (dataTypeChoice == 1) {
-                                            // Copy original data
                                             Integer[] workingData = integerData.clone();
-
-                                            // false = descending
                                             AlgorithmExamples.selectionSort(workingData, false);
-
                                             System.out.print("Sorted Data: ");
                                             AlgorithmExamples.printArray(workingData);
                                         } else {
-                                            // Copy original data
                                             String[] workingData = stringData.clone();
-
-                                            // false = descending
                                             AlgorithmExamples.selectionSort(workingData, false);
-
                                             System.out.print("Sorted Data: ");
                                             AlgorithmExamples.printArray(workingData);
                                         }
 
-                                        // Ask user what to do next
                                         afterSortChoiceSelection = SortingInterface.showAfterSortMenu(scanner);
                                         scanner.nextLine();
 
@@ -278,7 +258,6 @@ public class Main {
                                         SortingInterface.showMessage("Invalid choice!");
                                 }
                                 break;
-
 
                             // Merge Sort
                             case 3: {
@@ -455,13 +434,12 @@ public class Main {
                                 System.out.println("\nYou selected Integer.");
                                 System.out.print("Enter integers separated by spaces: ");
 
-                                // Read new integer input
+                                // Read new integer input and convert it into an Integer array
                                 String newIntegerInput = scanner.nextLine();
                                 String[] newIntegerValues = newIntegerInput.trim().split("\\s+");
 
                                 integerData = new Integer[newIntegerValues.length];
 
-                                // Convert String values to Integer
                                 for (int i = 0; i < newIntegerValues.length; i++) {
                                     integerData[i] = Integer.parseInt(newIntegerValues[i]);
                                 }
@@ -474,7 +452,7 @@ public class Main {
                                 System.out.println("\nYou selected String.");
                                 System.out.print("Enter strings separated by spaces: ");
 
-                                // Read new String input
+                                // Read new String input into a String array
                                 String newStringInput = scanner.nextLine();
                                 stringData = newStringInput.trim().split("\\s+");
 
@@ -517,8 +495,7 @@ public class Main {
                             }
 
                             case 5:
-                                // Return to Main Menu without changing data
-                                returnToMain = true;
+                                returnToMain = true; // return to Main Menu without changing data
                                 break;
 
                             default:
@@ -540,6 +517,7 @@ public class Main {
         scanner.close();
     }
 
+    // Generates a list of random integers within [min, max] of the given size
     public static List<Integer> generateRandomList(int size, int min, int max) {
         List<Integer> randomList = new ArrayList<>();
         Random random = new Random();
@@ -551,6 +529,7 @@ public class Main {
         return randomList;
     }
 
+    // Generates a list of random alphanumeric strings of the given size and length
     public static List<String> generateRandomStringList(int size, int stringLength) {
         List<String> randomList = new ArrayList<>();
 
@@ -558,14 +537,12 @@ public class Main {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
         for (int i = 0; i < size; i++) {
-            StringBuilder sb = new StringBuilder(stringLength); 
-            for ( int j = 0; j < stringLength; j++) {
+            StringBuilder sb = new StringBuilder(stringLength);
+            for (int j = 0; j < stringLength; j++) {
                 int index = random.nextInt(characters.length());
                 sb.append(characters.charAt(index));
-                
             }
             randomList.add(sb.toString());
-        
         }
         return randomList;
     }

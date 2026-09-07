@@ -16,15 +16,11 @@ class DataType<T> {
 
 public class AlgorithmExamples {
 
-    // ==========================================
-    // ANIMATION / VISUALIZATION CONFIG
-    // ==========================================
-
-    // Flip to false to fall back to the original plain-text step log
-    // (useful if a console/IDE doesn't render ANSI colors properly).
+    // Animation/visualization settings for the terminal box display
+    // Set to false to use plain-text step logging instead of colored boxes
     private static final boolean ANIMATE_WITH_BOXES = true;
 
-    // How long (ms) each animation frame stays on screen before the next one.
+    // Milliseconds each animation frame is held before advancing
     private static final int ANIMATION_DELAY_MS = 800;
 
     private static final String ANSI_RESET = "\u001B[0m";
@@ -34,8 +30,7 @@ public class AlgorithmExamples {
     private static final String ANSI_BRIGHT_MAGENTA = "\u001B[95m";
     private static final String ANSI_BRIGHT_CYAN = "\u001B[96m";
 
-    // The "role" a box plays in the current animation frame, and the color
-    // that goes with that role.
+    // Represents the role a box plays in the current frame, paired with its display color
     private enum BoxState {
         DEFAULT(ANSI_RESET, "Untouched"),
         SORTED(ANSI_BRIGHT_GREEN, "Sorted"),
@@ -52,9 +47,7 @@ public class AlgorithmExamples {
         }
     }
 
-    // ==========================================
-    // ANIMATION HELPER
-    // ==========================================
+    // Prints one animation frame (boxes or plain text) and pauses before the next step
     private static void pauseAndPrint(String message, Object[] array, Map<Integer, BoxState> highlights) {
         if (ANIMATE_WITH_BOXES) {
             printBoxes(message, array, highlights);
@@ -66,15 +59,13 @@ public class AlgorithmExamples {
             System.out.println();
         }
         try {
-            // Pauses the program to create an animation effect
-            Thread.sleep(ANIMATION_DELAY_MS);
+            Thread.sleep(ANIMATION_DELAY_MS); // pause to create the animation effect
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
 
-    // Draws every element as a colored box and redraws the terminal in place
-    // each frame, so it plays like a real animation instead of a scrolling log.
+    // Draws the array as colored boxes and redraws the screen in place for a live animation effect
     private static void printBoxes(String message, Object[] array, Map<Integer, BoxState> highlights) {
         int maxLen = 1;
         for (Object element : array) {
@@ -126,12 +117,13 @@ public class AlgorithmExamples {
                 + BoxState.RANGE.color + "Active Range" + ANSI_RESET);
     }
 
+    // Clears the terminal screen using an ANSI escape sequence
     private static void clearScreen() {
         System.out.print("\u001B[H\u001B[2J");
         System.out.flush();
     }
 
-    // Renders one final, all-green frame once an algorithm finishes sorting.
+    // Renders one final all-green frame to show the array is fully sorted
     private static void printSortedFrame(Object[] array) {
         Map<Integer, BoxState> highlights = new HashMap<>();
         for (int k = 0; k < array.length; k++) {
@@ -140,9 +132,7 @@ public class AlgorithmExamples {
         pauseAndPrint("Sorted!", array, highlights);
     }
 
-    // ==========================================
-    // SORTING ALGORITHMS
-    // ==========================================
+    // Sorts the array by repeatedly inserting each element into its correct position in the sorted portion
     public static <T extends Comparable<T>> void insertionSort(T[] array, boolean ascending) {
         for (int i = 1; i < array.length; i++) {
             T key = array[i];
@@ -170,6 +160,7 @@ public class AlgorithmExamples {
         printSortedFrame(array);
     }
 
+    // Sorts the array by repeatedly selecting the smallest (or largest) remaining element and swapping it into place
     public static <T extends Comparable<T>> void selectionSort(T[] array, boolean ascending) {
         for (int i = 0; i < array.length - 1; i++) {
             int selectedIndex = i;
@@ -200,6 +191,7 @@ public class AlgorithmExamples {
         printSortedFrame(array);
     }
 
+    // Merges two sorted subarrays [left..middle] and [middle+1..right] back into one sorted range
     public static <T extends Comparable<T>> void merge(T[] array, int left, int middle, int right, boolean ascending) {
         int node1 = middle - left + 1;
         int node2 = right - middle;
@@ -245,6 +237,7 @@ public class AlgorithmExamples {
         pauseAndPrint(label, array, highlights);
     }
 
+    // Recursively splits the array in half and merges the halves back together in sorted order
     public static <T extends Comparable<T>> void mergeSort(T[] array, int left, int right, boolean ascending) {
         if (left < right) {
             int middle = (left + right) / 2;
@@ -254,6 +247,7 @@ public class AlgorithmExamples {
         }
     }
 
+    // Swaps a random element within [left, right] into the rightmost slot to serve as the pivot
     private static <T> void randomPivot(T[] array, int left, int right) {
         Random rand = new Random();
         int pivotIndex = left + rand.nextInt(right - left + 1);
@@ -263,6 +257,7 @@ public class AlgorithmExamples {
         array[right] = temp1;
     }
 
+    // Partitions the range around a random pivot, placing smaller (or larger) elements before it
     private static <T extends Comparable<T>> int partition(T[] array, int left, int right, boolean ascending) {
         randomPivot(array, left, right);
         int pivotIndex = right;
@@ -295,6 +290,7 @@ public class AlgorithmExamples {
         return pivotFinalIndex;
     }
 
+    // Recursively partitions the array around pivots and sorts each side until fully sorted
     public static <T extends Comparable<T>> void quickSort(T[] array, int left, int right, boolean ascending) {
         if (left < right) {
             int pivotIndex = partition(array, left, right, ascending);
@@ -306,6 +302,7 @@ public class AlgorithmExamples {
         }
     }
 
+    // Prints all elements of the array on one line
     public static <T> void printArray(T[] array) {
         for (T element : array) {
             System.out.print(element + " ");
