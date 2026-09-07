@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -46,7 +49,39 @@ public class Main {
                     SortingInterface.showMessage("Data saved!");
                     break;
 
-                case 3:
+                case 3: {
+                    System.out.println("\nYou selected Random Integer.");
+                    int[] params = SortingInterface.showRandomIntegerPrompt(scanner);
+                    scanner.nextLine();
+
+                    List<Integer> randomInts = generateRandomList(params[0], params[1], params[2]);
+                    integerData = randomInts.toArray(new Integer[0]);
+
+                    System.out.print("Generated Data: ");
+                    AlgorithmExamples.printArray(integerData);
+
+                    SortingInterface.showMessage("Data saved!");
+                    dataTypeChoice = 1; // treat as integer data from here on
+                    break;
+                }
+
+                case 4: {
+                    System.out.println("\nYou selected Random String.");
+                    int[] params = SortingInterface.showRandomStringPrompt(scanner);
+                    scanner.nextLine();
+
+                    List<String> randomStrings = generateRandomStringList(params[0], params[1]);
+                    stringData = randomStrings.toArray(new String[0]);
+
+                    System.out.print("Generated Data: ");
+                    AlgorithmExamples.printArray(stringData);
+
+                    SortingInterface.showMessage("Data saved!");
+                    dataTypeChoice = 2; // treat as string data from here on
+                    break;
+                }
+
+                case 5:
                     SortingInterface.showMessage("Exiting program.");
                     scanner.close();
                     return;
@@ -409,6 +444,8 @@ public class Main {
                 case 2:
                     System.out.println("\nChanging data...");
 
+                    boolean returnToMain = false;
+
                     do {
                         dataTypeChoice = SortingInterface.showDataTypeMenu(scanner);
                         scanner.nextLine();
@@ -430,6 +467,7 @@ public class Main {
                                 }
 
                                 SortingInterface.showMessage("Data updated!");
+                                returnToMain = true;
                                 break;
 
                             case 2:
@@ -441,18 +479,52 @@ public class Main {
                                 stringData = newStringInput.trim().split("\\s+");
 
                                 SortingInterface.showMessage("Data updated!");
+                                returnToMain = true;
                                 break;
 
-                            case 3:
-                                // Return to Main Menu
+                            case 3: {
+                                System.out.println("\nYou selected Random Integer.");
+                                int[] params = SortingInterface.showRandomIntegerPrompt(scanner);
+                                scanner.nextLine();
+
+                                List<Integer> randomInts = generateRandomList(params[0], params[1], params[2]);
+                                integerData = randomInts.toArray(new Integer[0]);
+
+                                System.out.print("Generated Data: ");
+                                AlgorithmExamples.printArray(integerData);
+
+                                SortingInterface.showMessage("Data updated!");
+                                dataTypeChoice = 1; // treat as integer data from here on
+                                returnToMain = true;
+                                break;
+                            }
+
+                            case 4: {
+                                System.out.println("\nYou selected Random String.");
+                                int[] params = SortingInterface.showRandomStringPrompt(scanner);
+                                scanner.nextLine();
+
+                                List<String> randomStrings = generateRandomStringList(params[0], params[1]);
+                                stringData = randomStrings.toArray(new String[0]);
+
+                                System.out.print("Generated Data: ");
+                                AlgorithmExamples.printArray(stringData);
+
+                                SortingInterface.showMessage("Data updated!");
+                                dataTypeChoice = 2; // treat as string data from here on
+                                returnToMain = true;
+                                break;
+                            }
+
+                            case 5:
+                                // Return to Main Menu without changing data
+                                returnToMain = true;
                                 break;
 
                             default:
                                 SortingInterface.showMessage("Invalid choice!");
                         }
-                    } while (dataTypeChoice != 1 &&
-                            dataTypeChoice != 2 &&
-                            dataTypeChoice != 3);
+                    } while (!returnToMain);
                     break;
 
                 // Exit
@@ -466,5 +538,35 @@ public class Main {
         } while (mainChoice != 3);
 
         scanner.close();
+    }
+
+    public static List<Integer> generateRandomList(int size, int min, int max) {
+        List<Integer> randomList = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < size; i++) {
+            randomList.add(random.nextInt(max - min + 1) + min);
+        }
+
+        return randomList;
+    }
+
+    public static List<String> generateRandomStringList(int size, int stringLength) {
+        List<String> randomList = new ArrayList<>();
+
+        Random random = new Random();
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (int i = 0; i < size; i++) {
+            StringBuilder sb = new StringBuilder(stringLength); 
+            for ( int j = 0; j < stringLength; j++) {
+                int index = random.nextInt(characters.length());
+                sb.append(characters.charAt(index));
+                
+            }
+            randomList.add(sb.toString());
+        
+        }
+        return randomList;
     }
 }
